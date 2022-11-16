@@ -1,0 +1,29 @@
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\bin\Debug\PlateupPrepGhost.dll
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\bin\Debug\PlateupPrepGhost.pdb
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\bin\Debug\0Harmony.dll
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\bin\Debug\BepInEx.dll
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\bin\Debug\ChefConnector.dll
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\bin\Debug\Kitchen.Common.dll
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\bin\Debug\Kitchen.FranchiseBuilderMode.dll
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\bin\Debug\Kitchen.FranchiseMode.dll
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\bin\Debug\Kitchen.GameData.dll
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\bin\Debug\Kitchen.Layouts.dll
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\bin\Debug\Kitchen.Networking.dll
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\bin\Debug\Kitchen.Persistence.dll
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\bin\Debug\Kitchen.PostgameMode.dll
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\bin\Debug\Kitchen.ResearchMode.dll
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\bin\Debug\Kitchen.RestaurantMode.dll
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\bin\Debug\Kitchen.TutorialMode.dll
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\bin\Debug\KitchenMode.dll
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\bin\Debug\UnityEngine.CoreModule.dll
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\bin\Debug\UnityEngine.dll
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\bin\Debug\System.Memory.dll
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\bin\Debug\System.Buffers.dll
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\obj\Debug\PlateupPrepGhost.csprojAssemblyReference.cache
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\obj\Debug\PlateupPrepGhost.csproj.CoreCompileInputs.cache
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\obj\Debug\PlateupPrepGhost.csproj.CopyComplete
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\obj\Debug\PlateupPrepGhost.dll
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\obj\Debug\PlateupPrepGhost.pdb
+E:\Program Files\Steam\steamapps\common\PlateUp\PlateUp\BepInEx\plugins\PlateupPrepGhost.dll
+E:\Program Files\Steam\steamapps\common\PlateUp\PlateUp\BepInEx\plugins\PlateupPrepGhost.pdb
