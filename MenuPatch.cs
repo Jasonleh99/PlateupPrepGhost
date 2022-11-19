@@ -73,13 +73,5 @@ namespace PlateupPrepGhost
 
             return new Option<bool>(enableOptions, current, localizationOptions, null);
         }
-
-        private static List<Rigidbody> GetPlayerRigidBodies()
-        {
-            PlayerView[] players = UnityEngine.Object.FindObjectsOfType<PlayerView>();
-            List<Rigidbody> rigidbodies = new List<Rigidbody>();
-            players.ToList().ForEach(player => rigidbodies.Add(player.GameObject.GetComponent<Rigidbody>()));
-            return rigidbodies;
-        }
     }
 }
