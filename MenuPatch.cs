@@ -52,7 +52,7 @@ namespace PlateupPrepGhost
             Add(GetEnableOption())
                 .OnChanged += delegate (object _, bool value)
                 {
-                    GhostPatch.SetGhostModeForAllPlayers(true);
+                    GhostPatch.SetGhostModeForAllPlayers(value);
                     GhostPatch.GhostModeSetByMenu = true;
                 };
             AddButton(Localisation["MENU_BACK_SETTINGS"], (Action<int>)(i => RequestPreviousMenu()));
