@@ -32,49 +32,52 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>Libraries\0Harmony.dll</HintPath>
+      <HintPath>..\..\Libraries\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx">
-      <HintPath>Libraries\BepInEx.dll</HintPath>
+      <HintPath>..\..\Libraries\BepInEx.dll</HintPath>
     </Reference>
     <Reference Include="ChefConnector">
-      <HintPath>Libraries\ChefConnector.dll</HintPath>
+      <HintPath>..\..\Libraries\ChefConnector.dll</HintPath>
     </Reference>
     <Reference Include="Kitchen.Common">
-      <HintPath>Libraries\Kitchen.Common.dll</HintPath>
+      <HintPath>..\..\Libraries\Kitchen.Common.dll</HintPath>
     </Reference>
     <Reference Include="Kitchen.FranchiseBuilderMode">
-      <HintPath>Libraries\Kitchen.FranchiseBuilderMode.dll</HintPath>
+      <HintPath>..\..\Libraries\Kitchen.FranchiseBuilderMode.dll</HintPath>
     </Reference>
     <Reference Include="Kitchen.FranchiseMode">
-      <HintPath>Libraries\Kitchen.FranchiseMode.dll</HintPath>
+      <HintPath>..\..\Libraries\Kitchen.FranchiseMode.dll</HintPath>
     </Reference>
     <Reference Include="Kitchen.GameData">
-      <HintPath>Libraries\Kitchen.GameData.dll</HintPath>
+      <HintPath>..\..\Libraries\Kitchen.GameData.dll</HintPath>
     </Reference>
     <Reference Include="Kitchen.Layouts">
-      <HintPath>Libraries\Kitchen.Layouts.dll</HintPath>
+      <HintPath>..\..\Libraries\Kitchen.Layouts.dll</HintPath>
     </Reference>
     <Reference Include="Kitchen.Networking">
-      <HintPath>Libraries\Kitchen.Networking.dll</HintPath>
+      <HintPath>..\..\Libraries\Kitchen.Networking.dll</HintPath>
     </Reference>
     <Reference Include="Kitchen.Persistence">
-      <HintPath>Libraries\Kitchen.Persistence.dll</HintPath>
+      <HintPath>..\..\Libraries\Kitchen.Persistence.dll</HintPath>
     </Reference>
     <Reference Include="Kitchen.PostgameMode">
-      <HintPath>Libraries\Kitchen.PostgameMode.dll</HintPath>
+      <HintPath>..\..\Libraries\Kitchen.PostgameMode.dll</HintPath>
     </Reference>
     <Reference Include="Kitchen.ResearchMode">
-      <HintPath>Libraries\Kitchen.ResearchMode.dll</HintPath>
+      <HintPath>..\..\Libraries\Kitchen.ResearchMode.dll</HintPath>
     </Reference>
     <Reference Include="Kitchen.RestaurantMode">
-      <HintPath>Libraries\Kitchen.RestaurantMode.dll</HintPath>
+      <HintPath>..\..\Libraries\Kitchen.RestaurantMode.dll</HintPath>
     </Reference>
     <Reference Include="Kitchen.TutorialMode">
-      <HintPath>Libraries\Kitchen.TutorialMode.dll</HintPath>
+      <HintPath>..\..\Libraries\Kitchen.TutorialMode.dll</HintPath>
     </Reference>
     <Reference Include="KitchenMode">
-      <HintPath>Libraries\KitchenMode.dll</HintPath>
+      <HintPath>..\..\Libraries\KitchenMode.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.Serialization">
+      <HintPath>E:\Program Files\Steam\steamapps\common\PlateUp\PlateUp\PlateUp_Data\Managed\Sirenix.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -85,17 +88,19 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
-      <HintPath>Libraries\UnityEngine.dll</HintPath>
+      <HintPath>..\..\Libraries\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>Libraries\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\..\Libraries\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.PhysicsModule">
-      <HintPath>Libraries\UnityEngine.PhysicsModule.dll</HintPath>
+      <HintPath>..\..\Libraries\UnityEngine.PhysicsModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BoundariesPatch.cs" />
     <Compile Include="GhostPatch.cs" />
+    <Compile Include="MenuPatch.cs" />
     <Compile Include="PlateupPrepGhost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

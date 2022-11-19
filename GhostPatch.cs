@@ -11,47 +11,41 @@ namespace PlateupPrepGhost
 {
     class GhostPatch
     {
-        private const string PLAYERS_COLLISION_LAYER_NAME = "Players";
-        private const string DYNAMIC_OBJECT_COLLISION_LAYER_NAME = "Default";
-        private const string STATIC_OBJECT_COLLISION_LAYER_NAME = "Statics";
-
         private static readonly ManualLogSource logger = BepInEx.Logging.Logger.CreateLogSource("GhostPatch");
-        private static bool GhostModeActivated = false;
+        public static bool GhostModeActivated = false;
+        public static bool GhostModeSetByMenu = false;
 
-        public static bool Update_CheckPrepState(PlayerView __instance, Rigidbody ___Rigidbody)
+        public static bool Update_CheckPrepState(Rigidbody ___Rigidbody)
         {
-            if (GameInfo.IsPreparationTime && !GhostModeActivated)
+            if (GameInfo.IsPreparationTime 
+                && !GhostModeActivated 
+                && !GhostModeSetByMenu)
             {
-                logger.LogInfo("Activating Ghost Mode");
-                SetGhostMode(true);
-                GhostModeActivated = true;
-            } else if (!GameInfo.IsPreparationTime && GhostModeActivated)
+                SetGhostMode(true, ___Rigidbody);
+            } else if (!GameInfo.IsPreparationTime 
+                && GhostModeActivated 
+                && GameInfo.CurrentScene == SceneType.Kitchen)
             {
-                logger.LogInfo("Deactivating Ghost Mode");
-                SetGhostMode(false);
-                GhostModeActivated = false;
+                SetGhostMode(false, ___Rigidbody);
+                GhostModeSetByMenu = false;
             }
-            
+
             return true;
         }
 
-        public static void SetGhostMode(bool enable)
+        public static void SetGhostMode(bool enable, Rigidbody rigidbody)
         {
-            Physics.IgnoreLayerCollision(
-                LayerMask.NameToLayer(PLAYERS_COLLISION_LAYER_NAME)
-                , LayerMask.NameToLayer(DYNAMIC_OBJECT_COLLISION_LAYER_NAME)
-                , enable);
-            Physics.IgnoreLayerCollision(
-                LayerMask.NameToLayer(PLAYERS_COLLISION_LAYER_NAME)
-                , LayerMask.NameToLayer(STATIC_OBJECT_COLLISION_LAYER_NAME)
-                , enable);
+            logger.LogInfo("Ghost Mode set to: " + enable);
+            rigidbody.detectCollisions = !enable;
+            GhostModeActivated = enable;
+        }
+
+        public static void SetGhostModeForAllPlayers(bool value)
+        {
+            PlayerView[] players = UnityEngine.Object.FindObjectsOfType<PlayerView>();
+            List<Rigidbody> rigidbodies = new List<Rigidbody>();
+            players.ToList().ForEach(player => rigidbodies.Add(player.GameObject.GetComponent<Rigidbody>()));
+            rigidbodies.ForEach(player => GhostPatch.SetGhostMode(value, player));
         }
     }
 }
-/***
- * 
- * 
- * 
- * 
- * 
- */

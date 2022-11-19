@@ -20,12 +20,27 @@ namespace PlateupPrepGhost
         {
             Harmony harmony = new Harmony(pluginGuid);
 
+            // Active patch for gameplay.
             harmony.Patch(AccessTools.Method(typeof(PlayerView), "Update"), 
                 prefix:
                 new HarmonyMethod(
                     AccessTools.Method(typeof(GhostPatch), "Update_CheckPrepState")));
-        }
 
-        
+            // Patch to disable bounds checking
+            harmony.Patch(AccessTools.Method(typeof(EnforcePlayerBounds), "OnUpdate"),
+                prefix:
+                new HarmonyMethod(
+                    AccessTools.Method(typeof(BoundariesPatch), "OnUpdate_disableBounds")));
+
+            // Option menu patches to add options
+            harmony.Patch(AccessTools.Method(typeof(MainMenu), nameof(MainMenu.Setup)),
+                prefix:
+                new HarmonyMethod(
+                    AccessTools.Method(typeof(MenuPatch), nameof(MenuPatch.Setup_AddPrepGhostMenu))));
+            harmony.Patch(AccessTools.Method(typeof(PlayerPauseView), "SetupMenus"),
+                prefix:
+                new HarmonyMethod(
+                    AccessTools.Method(typeof(MenuPatch), nameof(MenuPatch.SetupMenus_AddPrepGhostMenu))));
+        }
     }
 }
