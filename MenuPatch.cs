@@ -45,11 +45,14 @@ namespace PlateupPrepGhost
     {
         private static readonly ManualLogSource logger = BepInEx.Logging.Logger.CreateLogSource("PlateupPrepGhost_PrepGhostOptionsMenu");
 
+        public Option<bool> EnableOption;
+
         public PrepGhostOptionsMenu(Transform container, ModuleList module_list) : base(container, module_list) {}
 
         public override void Setup(int player_id)
         {
-            Add(GetEnableOption())
+            EnableOption = GetEnableOption();
+            Add(EnableOption)
                 .OnChanged += delegate (object _, bool value)
                 {
                     GhostPatch.SetGhostModeForAllPlayers(value);

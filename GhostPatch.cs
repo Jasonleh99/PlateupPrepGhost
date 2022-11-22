@@ -17,17 +17,34 @@ namespace PlateupPrepGhost
 
         public static bool Update_CheckPrepState(Rigidbody ___Rigidbody)
         {
-            if (GameInfo.IsPreparationTime 
-                && !GhostModeActivated 
-                && !GhostModeSetByMenu)
-            {
-                SetGhostMode(true, ___Rigidbody);
-            } else if (!GameInfo.IsPreparationTime 
-                && GhostModeActivated 
+            // Disable ghost mode during non prep time no matter what if:
+            // 1. ghost mode for rigid body is enabled
+            // 2. It isn't prep time or practice time
+            // 3. and it isn't in the kitchen
+            if (GhostEnabledForBody(___Rigidbody)
+                && !GameInfo.IsPreparationTime
                 && GameInfo.CurrentScene == SceneType.Kitchen)
             {
                 SetGhostMode(false, ___Rigidbody);
                 GhostModeSetByMenu = false;
+                GhostModeActivated = false;
+                return true;
+            }
+
+            // Ghost mode menu setting takes precedent
+            if (GhostModeSetByMenu && GhostEnabledForBody(___Rigidbody) != GhostModeActivated)
+            {
+                SetGhostMode(GhostModeActivated, ___Rigidbody);
+                return true;
+            }
+
+            // Otherwise activate ghost mode during practice
+            if (GameInfo.IsPreparationTime 
+                && !GhostModeSetByMenu
+                && !GhostEnabledForBody(___Rigidbody))
+            {
+                GhostModeActivated = true;
+                SetGhostMode(true, ___Rigidbody);
             }
 
             return true;
@@ -37,15 +54,20 @@ namespace PlateupPrepGhost
         {
             logger.LogInfo("Ghost Mode set to: " + enable);
             rigidbody.detectCollisions = !enable;
-            GhostModeActivated = enable;
         }
 
         public static void SetGhostModeForAllPlayers(bool value)
         {
+            GhostModeActivated = value;
             PlayerView[] players = UnityEngine.Object.FindObjectsOfType<PlayerView>();
             List<Rigidbody> rigidbodies = new List<Rigidbody>();
             players.ToList().ForEach(player => rigidbodies.Add(player.GameObject.GetComponent<Rigidbody>()));
             rigidbodies.ForEach(player => GhostPatch.SetGhostMode(value, player));
+        }
+
+        private static bool GhostEnabledForBody(Rigidbody rigidbody)
+        {
+            return !rigidbody.detectCollisions;
         }
     }
 }
