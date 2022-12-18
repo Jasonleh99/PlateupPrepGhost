@@ -1,4 +1,4 @@
-﻿using BepInEx.Logging;
+﻿using HarmonyLib;
 using Kitchen;
 using Kitchen.Modules;
 using KitchenData;
@@ -12,22 +12,14 @@ using UnityEngine;
 
 namespace PlateupPrepGhost
 {
+    [HarmonyPatch(typeof(MainMenu), nameof(MainMenu.Setup))]
     class MenuPatch
     {
-        private static readonly ManualLogSource logger = BepInEx.Logging.Logger.CreateLogSource("PlateupPrepGhost_MenuPatch");
-
+        [HarmonyPrefix]
         public static void Setup_AddPrepGhostMenu(MainMenu __instance)
         {
             MethodInfo m_addButtonMenu = GetMethod(__instance.GetType(), "AddSubmenuButton");
             m_addButtonMenu.Invoke(__instance, new object[3] { "PrepGhost", typeof(PrepGhostOptionsMenu), false });
-        }
-
-        public static void SetupMenus_AddPrepGhostMenu(PlayerPauseView __instance)
-        {
-            ModuleList moduleList = (ModuleList)__instance.GetType().GetField("ModuleList", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(__instance);
-            MethodInfo mInfo = GetMethod(__instance.GetType(), "AddMenu");
-
-            mInfo.Invoke(__instance, new object[2] { typeof(PrepGhostOptionsMenu), new PrepGhostOptionsMenu(__instance.ButtonContainer, moduleList) });
         }
 
         public static MethodInfo GetMethod(Type _typeOfOriginal, string _name, Type _genericT = null)
@@ -41,16 +33,28 @@ namespace PlateupPrepGhost
         }
     }
 
+    [HarmonyPatch(typeof(PlayerPauseView), "SetupMenus")]
+    class PausePatch
+    {
+        [HarmonyPrefix]
+        public static void SetupMenus_AddPrepGhostMenu(PlayerPauseView __instance)
+        {
+            ModuleList moduleList = (ModuleList)__instance.GetType().GetField("ModuleList", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(__instance);
+            MethodInfo mInfo = MenuPatch.GetMethod(__instance.GetType(), "AddMenu");
+
+            mInfo.Invoke(__instance, new object[2] { typeof(PrepGhostOptionsMenu), new PrepGhostOptionsMenu(__instance.ButtonContainer, moduleList) });
+        }
+    }
+
     class PrepGhostOptionsMenu : Menu<PauseMenuAction>
     {
-        private static readonly ManualLogSource logger = BepInEx.Logging.Logger.CreateLogSource("PlateupPrepGhost_PrepGhostOptionsMenu");
-
         public Option<bool> EnableOption;
 
         public PrepGhostOptionsMenu(Transform container, ModuleList module_list) : base(container, module_list) {}
 
         public override void Setup(int player_id)
         {
+            Debug.LogWarning("AHSUIDASKDNAKJSDNKJASNDJKAKJSD");
             EnableOption = GetEnableOption();
             Add(EnableOption)
                 .OnChanged += delegate (object _, bool value)

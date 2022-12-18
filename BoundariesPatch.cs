@@ -1,4 +1,4 @@
-﻿using BepInEx.Logging;
+﻿using HarmonyLib;
 using Kitchen;
 using System;
 using System.Collections.Generic;
@@ -9,11 +9,10 @@ using UnityEngine;
 
 namespace PlateupPrepGhost
 {
+    [HarmonyPatch(typeof(EnforcePlayerBounds), "OnUpdate")]
     class BoundariesPatch
     {
-
-        private static readonly ManualLogSource logger = BepInEx.Logging.Logger.CreateLogSource("BoundariesPatch");
-
+        [HarmonyPrefix]
         public static bool OnUpdate_disableBounds(EnforcePlayerBounds __instance)
         {
             return false;

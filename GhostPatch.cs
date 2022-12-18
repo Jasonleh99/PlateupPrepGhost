@@ -1,4 +1,4 @@
-﻿using BepInEx.Logging;
+﻿using HarmonyLib;
 using Kitchen;
 using System;
 using System.Collections.Generic;
@@ -9,13 +9,14 @@ using UnityEngine;
 
 namespace PlateupPrepGhost
 {
+    [HarmonyPatch(typeof(PlayerView), "Update")]
     class GhostPatch
     {
-        private static readonly ManualLogSource logger = BepInEx.Logging.Logger.CreateLogSource("GhostPatch");
         public static bool GhostModeActivated = false;
         public static bool GhostModeSetByMenu = false;
 
-        public static bool Update_CheckPrepState(Rigidbody ___Rigidbody)
+        [HarmonyPostfix]
+        public static void Update_CheckPrepState(Rigidbody ___Rigidbody)
         {
             // Disable ghost mode during non prep time no matter what if:
             // 1. ghost mode for rigid body is enabled
@@ -28,14 +29,12 @@ namespace PlateupPrepGhost
                 SetGhostMode(false, ___Rigidbody);
                 GhostModeSetByMenu = false;
                 GhostModeActivated = false;
-                return true;
             }
 
             // Ghost mode menu setting takes precedent
             if (GhostModeSetByMenu && GhostEnabledForBody(___Rigidbody) != GhostModeActivated)
             {
                 SetGhostMode(GhostModeActivated, ___Rigidbody);
-                return true;
             }
 
             // Otherwise activate ghost mode during practice
@@ -46,13 +45,10 @@ namespace PlateupPrepGhost
                 GhostModeActivated = true;
                 SetGhostMode(true, ___Rigidbody);
             }
-
-            return true;
         }
-
         public static void SetGhostMode(bool enable, Rigidbody rigidbody)
         {
-            logger.LogInfo("Ghost Mode set to: " + enable);
+            Debug.Log(typeof(GhostPatch).Name + ": Ghost Mode set to: " + enable);
             rigidbody.detectCollisions = !enable;
         }
 

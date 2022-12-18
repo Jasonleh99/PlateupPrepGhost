@@ -1,0 +1,6 @@
+E:\Program Files\Steam\steamapps\common\PlateUp\PlateUp\Mods\PlateupPrepGhost.dll
+E:\Program Files\Steam\steamapps\common\PlateUp\PlateUp\Mods\PlateupPrepGhost.pdb
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\PlateupPrepGhost\obj\Release\PlateupPrepGhost.csproj.CoreCompileInputs.cache
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\PlateupPrepGhost\obj\Release\PlateupPrepGhost.csproj.CopyComplete
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\PlateupPrepGhost\obj\Release\PlateupPrepGhost.dll
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\PlateupPrepGhost\obj\Release\PlateupPrepGhost.pdb

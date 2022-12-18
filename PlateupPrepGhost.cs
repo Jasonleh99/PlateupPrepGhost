@@ -1,46 +1,35 @@
-﻿using BepInEx;
-using HarmonyLib;
+﻿using HarmonyLib;
 using Kitchen;
+using KitchenMods;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace PlateupPrepGhost
 {
-    [BepInPlugin(pluginGuid, pluginName, pluginVersion)]
-    public class PlateupPrepGhost : BaseUnityPlugin
+    public class PlateupPrepGhost : GenericSystemBase, IModSystem
     {
-        public const string pluginGuid = "happening.plateup.plateupprepghost";
-        public const string pluginName = "Plateup Prep Ghost";
-        public const string pluginVersion = "1.0";
-
-        public void Awake()
+        public static readonly string VERSION = "1.15";
+        protected override void Initialise()
         {
-            Harmony harmony = new Harmony(pluginGuid);
+            GameObject prepGhostMod = new GameObject("PlateupPrepGhost");
+            prepGhostMod.AddComponent<PrepGhostPatcher>();
+            GameObject.DontDestroyOnLoad(prepGhostMod);
+        }
 
-            // Active patch for gameplay.
-            harmony.Patch(AccessTools.Method(typeof(PlayerView), "Update"), 
-                prefix:
-                new HarmonyMethod(
-                    AccessTools.Method(typeof(GhostPatch), "Update_CheckPrepState")));
+        protected override void OnUpdate() {}
+    }
 
-            // Patch to disable bounds checking
-            harmony.Patch(AccessTools.Method(typeof(EnforcePlayerBounds), "OnUpdate"),
-                prefix:
-                new HarmonyMethod(
-                    AccessTools.Method(typeof(BoundariesPatch), "OnUpdate_disableBounds")));
+    public class PrepGhostPatcher : MonoBehaviour
+    {
+        private readonly HarmonyLib.Harmony harmony = new HarmonyLib.Harmony("happening.plateup.plateupprepghost");
 
-            // Option menu patches to add options
-            harmony.Patch(AccessTools.Method(typeof(MainMenu), nameof(MainMenu.Setup)),
-                prefix:
-                new HarmonyMethod(
-                    AccessTools.Method(typeof(MenuPatch), nameof(MenuPatch.Setup_AddPrepGhostMenu))));
-            harmony.Patch(AccessTools.Method(typeof(PlayerPauseView), "SetupMenus"),
-                prefix:
-                new HarmonyMethod(
-                    AccessTools.Method(typeof(MenuPatch), nameof(MenuPatch.SetupMenus_AddPrepGhostMenu))));
+        private void Awake()
+        {
+            harmony.PatchAll();
         }
     }
 }
