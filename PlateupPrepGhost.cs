@@ -15,6 +15,8 @@ namespace PlateupPrepGhost
         public static readonly string VERSION = "1.15";
         protected override void Initialise()
         {
+            if (GameObject.FindObjectOfType<PrepGhostPatcher>() != null)
+                return;
             GameObject prepGhostMod = new GameObject("PlateupPrepGhost");
             prepGhostMod.AddComponent<PrepGhostPatcher>();
             GameObject.DontDestroyOnLoad(prepGhostMod);
