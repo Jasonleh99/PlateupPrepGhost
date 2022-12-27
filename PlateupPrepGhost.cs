@@ -31,7 +31,7 @@ namespace PlateupPrepGhost
 
         private void Awake()
         {
-            harmony.PatchAll();
+            harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
     }
 }
