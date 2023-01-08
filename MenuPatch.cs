@@ -49,19 +49,21 @@ namespace PlateupPrepGhost
     class PrepGhostOptionsMenu : Menu<PauseMenuAction>
     {
         public Option<bool> EnableOption;
+        // Default player set while ghost mode is activated
+        public Option<float> SpeedOption;
 
         public PrepGhostOptionsMenu(Transform container, ModuleList module_list) : base(container, module_list) {}
 
         public override void Setup(int player_id)
         {
-            Debug.LogWarning("AHSUIDASKDNAKJSDNKJASNDJKAKJSD");
             EnableOption = GetEnableOption();
-            Add(EnableOption)
-                .OnChanged += delegate (object _, bool value)
-                {
-                    GhostPatch.SetGhostModeForAllPlayers(value);
-                    GhostPatch.GhostModeSetByMenu = true;
-                };
+            this.AddLabel("Ghost Mode");
+            Add(EnableOption);
+
+            SpeedOption = GetSpeedOption();
+            this.AddLabel("Ghost Speed");
+            Add(SpeedOption);
+
             AddButton(Localisation["MENU_BACK_SETTINGS"], (Action<int>)(i => RequestPreviousMenu()));
         }
 
@@ -78,7 +80,41 @@ namespace PlateupPrepGhost
                 this.Localisation["SETTING_ENABLED"]
             };
 
-            return new Option<bool>(enableOptions, current, localizationOptions, null);
+            Option<bool> enableOption = new Option<bool>(enableOptions, current, localizationOptions, null);
+            enableOption.OnChanged += delegate (object _, bool value)
+            {
+                GhostPatch.GhostModeActivated = value;
+                GhostPatch.GhostModeSetByMenu = true;
+            };
+
+            return enableOption;
+        }
+
+        private Option<float> GetSpeedOption()
+        {
+            List<float> speedOptions = new List<float>()
+            {
+                1f
+            };
+            List<string> localization = new List<string>
+            {
+                this.Localisation["SETTING_DISABLED"]
+            };
+
+            for (float i = 1.5f; i <= 10f; i += 0.5f)
+            {
+                speedOptions.Add(i);
+                localization.Add(i + "");
+            }
+            float current = GhostPatch.GhostSpeed;
+
+            Option<float> speedOption = new Option<float>(speedOptions, current, localization, null);
+            speedOption.OnChanged += delegate (object _, float value)
+            {
+                GhostPatch.GhostSpeed = value;
+            };
+
+            return speedOption;
         }
     }
 }

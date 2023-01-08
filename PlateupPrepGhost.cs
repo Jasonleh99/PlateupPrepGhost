@@ -4,6 +4,7 @@ using KitchenMods;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -12,7 +13,7 @@ namespace PlateupPrepGhost
 {
     public class PlateupPrepGhost : GenericSystemBase, IModSystem
     {
-        public static readonly string VERSION = "1.15";
+        public static readonly string VERSION = "1.20";
         protected override void Initialise()
         {
             if (GameObject.FindObjectOfType<PrepGhostPatcher>() != null)

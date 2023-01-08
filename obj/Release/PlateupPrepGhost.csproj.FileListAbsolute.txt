@@ -4,3 +4,4 @@ C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\PlateupPrepGhost\ob
 C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\PlateupPrepGhost\obj\Release\PlateupPrepGhost.csproj.CopyComplete
 C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\PlateupPrepGhost\obj\Release\PlateupPrepGhost.dll
 C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\PlateupPrepGhost\obj\Release\PlateupPrepGhost.pdb
+C:\Users\jason\Documents\PlateupModProjects\PlateupPrepGhost\PlateupPrepGhost\obj\Release\PlateupPrepGhost.csprojAssemblyReference.cache
