@@ -85,6 +85,7 @@ namespace PlateupPrepGhost
             {
                 GhostPatch.GhostModeActivated = value;
                 GhostPatch.GhostModeSetByMenu = true;
+                GhostPatch.GhostSpeedSet = false;
             };
 
             return enableOption;
@@ -112,6 +113,7 @@ namespace PlateupPrepGhost
             speedOption.OnChanged += delegate (object _, float value)
             {
                 GhostPatch.GhostSpeed = value;
+                GhostPatch.GhostSpeedSet = false;
             };
 
             return speedOption;

@@ -20,8 +20,9 @@ namespace PlateupPrepGhost
         // Speed to set players at while ghost mode is activated. Default of a 50%
         // speed boost, 1.5f
         public static float GhostSpeed = 1.5f;
+        public static bool GhostSpeedSet = false;
 
-        [HarmonyPostfix]
+        [HarmonyPrefix]
         public static void Update_CheckPrepState(PlayerView __instance, bool ___IsMyPlayer, Rigidbody ___Rigidbody)
         {
             // Do nothing if this view is not owned by the current player
@@ -38,6 +39,7 @@ namespace PlateupPrepGhost
         {
             Debug.Log(typeof(GhostPatch).Name + ": Ghost Mode set to: " + enable);
             rigidbody.detectCollisions = !enable;
+            GhostSpeedSet = false;
         }
 
         private static bool GhostEnabledForBody(Rigidbody rigidbody)
@@ -47,13 +49,21 @@ namespace PlateupPrepGhost
 
         private static void HandleSpeed(PlayerView playerView, Rigidbody rigidbody, float setSpeed)
         {
-            if (GhostModeActivated && playerView.Speed != setSpeed)
+            // Don't modify speed if its already been set
+            if (GhostSpeedSet)
             {
-                Debug.Log(typeof(GhostPatch).Name + ": Setting player speed to " + setSpeed);
-                playerView.Speed = setSpeed;
-            } else if (!GhostModeActivated && playerView.Speed != PLAYER_SPEED)
+                return;
+            }
+
+            if (GhostModeActivated)
+            {
+                Debug.Log(typeof(GhostPatch).Name + ": Setting player speed to " + (PLAYER_SPEED * GhostSpeed));
+                playerView.Speed = PLAYER_SPEED * GhostSpeed;
+                GhostSpeedSet = true;
+            } else
             {
                 playerView.Speed = PLAYER_SPEED;
+                GhostSpeedSet = true;
             }
         }
 
@@ -70,6 +80,7 @@ namespace PlateupPrepGhost
                 SetGhostMode(false, rigidbody);
                 GhostModeSetByMenu = false;
                 GhostModeActivated = false;
+                GhostSpeedSet = false;
                 return;
             }
 
